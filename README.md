@@ -1,3 +1,3 @@
 # HyperfGrassURP
 
-TODO
+![teaser](./assets/teaser.png)
