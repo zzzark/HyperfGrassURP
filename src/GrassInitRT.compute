@@ -1,0 +1,13 @@
+#pragma kernel CSInit
+#include "Math.hlsl"
+
+
+RWTexture2D<float4> _InitGrass;
+
+
+[numthreads(8,8,1)]
+void CSInit (uint3 id : SV_DispatchThreadID)
+{
+    float3 offset = rand3((float3)id) - 0.5;
+    _InitGrass[id.xy] = float4(offset.x, 0.0, offset.z, 1.0);
+}

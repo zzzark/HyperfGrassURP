@@ -1,0 +1,32 @@
+#pragma kernel Main
+
+#define _DIST_RANGE 0.125
+
+float _PositionScale;
+float2 _TextureHalfSize;
+
+Texture2D<float4> _InitGrass;
+RWTexture2D<float4> _EditGrass;
+
+int _ColliderCount;
+float4 _Colliders[8];
+
+
+// [numthreads(128, 1, 1)]
+[numthreads(8, 8, 1)]
+void Main(uint3 uid : SV_DispatchThreadID)
+{
+    float3 xyz = _InitGrass[uid.xy].xyz;
+    float3 positionWS = xyz + 
+        _PositionScale * float3((float)uid.x - _TextureHalfSize.x, 0.0, (float)uid.y - _TextureHalfSize.y);
+    
+    for (int c = 0; c < _ColliderCount; c++)
+    {
+        float coL = length(_Colliders[c].xyz - positionWS);
+        float coR = _Colliders[c].w;
+
+        if (coL < coR + _DIST_RANGE) {
+            _EditGrass[uid.xy].xyzw = float4(xyz.x, xyz.y, xyz.z, 0.0);  // mark w as 0.0 for cut grass
+        }
+    }
+}
