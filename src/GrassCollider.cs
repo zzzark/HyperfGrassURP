@@ -5,7 +5,7 @@ using UnityEngine.Experimental.Rendering;
 
 class GrassCollider : GrassRendererRT._GrassCollider
 {
-    [SerializeField] private float radius;
+    [SerializeField] private float radius = 1f;
     public override float Radius {
         get {
             return radius;

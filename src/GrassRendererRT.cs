@@ -13,11 +13,11 @@ public partial class GrassRendererRT : MonoBehaviour
     private int _kernelGen;
     private int _Time, _Wind, _PositionScale, _TextureHalfSize, _WorldSpaceCameraPos, _ViewProj, _CameraDepthTexture;
 
-    [SerializeField] private int grassCountSqrt = 512;
-    [SerializeField] private int maxBufferCount = 1024;
+    [SerializeField] private int grassCountSqrt = 800;
+    [SerializeField] private int maxBufferCount = 2560000;
     [SerializeField] private Material grassMat;
 
-    [SerializeField, Range(5f, 1000f)] private float spawnRadius;
+    [SerializeField, Range(5f, 1000f)] private float spawnRadius = 100f;
 
     private const int VERTEX_DATA_SIZE = (1+3+3)*sizeof(float);
     private const int TRIANGLE_DATA_SIZE = 3*VERTEX_DATA_SIZE + 3*sizeof(float);
